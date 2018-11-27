@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DBApp: {% block title %} {% endblock %}</title>
+</head>
+<body>
+    <div>
+        <button type="button" onclick="location.href='/login'">Log IN</button>
+        <button type="button" onclick="location.href='/logout'">Log Out</button>
+        <button type="button" onclick="location.href='/'">Main</button>
+    </div>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

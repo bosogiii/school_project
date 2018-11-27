@@ -1,0 +1,7 @@
+실행방법
+
+Server
+java -jar UDPChatting.jar [포트번호]
+
+Client
+java -jar UDPChatting.jar [서버주소] [포트번호]

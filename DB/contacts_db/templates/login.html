@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{%block title %}
+Log In
+{%  endblock %}
+
+{% block body %}
+<h1>portal Log In</h1>
+{{ msg }}
+<form action="/login" method='POST'>
+    <input type='text' name='sid' placeholder="ID">
+    <input type="password" name="passwd" placeholder="Password">
+    <input type="submit" value="Log In">
+</form>
+
+{% endblock %}
+

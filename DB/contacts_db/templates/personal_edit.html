@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{%block title %}
+Edit
+{%  endblock %}
+
+{% block body %}
+<h1>Edit Contacts</h1>
+
+<form action="/contacts/edit" method='POST'>
+
+    <input type='text' name="name" placeholder="name" value="{{info['name']}}">
+    {% if info['mode'] != "edit" %}
+    <input type="text" name="phone" placeholder="phone number" value="{{info['phone']}}" required>
+    {% endif %}
+    <input type="hidden" name="phone" value="{{info['phone']}}">
+    <input type="email" name="email" placeholder="mail" value="{{info['email']}}">
+    <input type="text" name="position" placeholder="position" value="{{info['position']}}">
+    <input type="hidden" name="mode" value="{{info['mode']}}">
+    <input type="submit" value="edit">
+
+{% endblock %}
+

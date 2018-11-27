@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{%block title %}
+Edit
+{%  endblock %}
+
+{% block body %}
+<h1>Edit Contacts</h1>
+
+<form action="/admin/hyucontacts/edit" method='POST'>
+    {% if info['mode'] != "edit"%}
+    <input type='text' name="sid" placeholder="sid" value="{{info['sid']}}" required>
+    {% endif %}
+    <input type='hidden' name="sid" value="{{info['sid']}}">
+    <input type="text" name="phone" placeholder="phone number" value="{{info['phone']}}">
+    <input type="email" name="email" placeholder="mail" value="{{info['email']}}">
+    <input type="hidden" name="mode" value="{{info['mode']}}">
+    <input type="submit" value="edit">
+</form>
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{%block title %}
+HYU Statistics
+{%  endblock %}
+
+{% block body %}
+<h1>HYU Statistics</h1>
+
+<table>
+    <tr>
+        <th>Domain Name</th>
+        <th>Count</th>
+    </tr>
+    {% for domain, count in email.items() %}
+    <tr>
+        <td>{{domain}}</td>
+        <td>{{count}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

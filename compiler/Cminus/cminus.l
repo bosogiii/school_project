@@ -28,14 +28,9 @@ whitespace  [ \t]+
 "return"        {return RETURN;}
 "int"           {return INT;}
 "void"          {return VOID;}
-"then"          {return THEN;}
-"end"           {return END;}
-"repeat"        {return REPEAT;}
-"until"         {return UNTIL;}
-"read"          {return READ;}
-"write"         {return WRITE;}
 "="             {return ASSIGN;}
 "=="            {return EQ;}
+"!="            {return NE;}
 "<"             {return LT;}
 "<="            {return LE;}
 ">"             {return GT;}
@@ -57,7 +52,7 @@ whitespace  [ \t]+
 {newline}       {lineno++;}
 {whitespace}    {/* skip whitespace */}
 "/*"             { char c;
-                    char d = '\n';
+                    char d = '\0';
                   do
                   { c = input();
                     if (c == EOF) break;

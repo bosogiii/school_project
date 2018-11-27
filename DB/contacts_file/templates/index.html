@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{%block title %}
+Mail Portal
+{%  endblock %}
+
+{% block body %}
+<h1>Hanyang Mail</h1>
+{% if session['sname'] == None %}
+    <h4>Login please!</h4>
+{% else %}
+    <h4>Hello {{session['sname']}}!</h4>
+
+    {{ msg }}
+    <ul>
+        <li>
+            <a href="/mailbox">Mailbox</a>
+        </li>
+        <li>
+            <a href="/contacts">Contacts</a>
+        </li>
+        {% if session['sid'] == 'admin' %}
+        <h4>Admin Menu</h4>
+        <li>
+            <a href="/admin/hyucontacts">HYU Contacts</a>
+        </li>
+        <li>
+            <a href="/admin/statistics">HYU Contacts Statistics</a>
+        </li>
+        <li>
+            <a href="/admin/useradd">User Add</a>
+        </li>
+        {% endif %}
+    </ul>
+{% endif %}
+{% endblock %}

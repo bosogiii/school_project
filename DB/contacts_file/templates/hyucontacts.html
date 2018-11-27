@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{%block title %}
+HYU Contacts
+{%  endblock %}
+
+{% block body %}
+<h1>HYU Contacts</h1>
+{{ msg }}
+<table>
+    <tr>
+        {% for item in hyu_header %}
+        <th>{{ item }}</th>
+        {% endfor %}
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    {% for row in hyu_contacts %}
+    <tr>
+        {% for item in row %}
+        <td>{{ item }}</td>
+        {% endfor %}
+        <td>
+            <form action="/admin/hyucontacts/edit" method ="GET">
+                <input type='hidden' name="sid" value={{row[1]}}>
+                <input type="hidden" name="phone" value={{row[2]}}>
+                <input type="hidden" name="email" value={{row[3]}}>
+                <input type='hidden' name="mode" value="edit">
+                <input type="submit" value="edit">
+            </form>
+        </td>
+        <td>
+            <form action="/admin/hyucontacts/edit" method='POST'>
+                <input type='hidden' name="sid" value="{{row[1]}}">
+                <input type="hidden" name="mode", value="delete">
+                <input type="submit" value="delete">
+            </form>
+
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div>
+    <form action="/admin/hyucontacts/edit" method ="GET">
+                <input type='hidden' name="mode" value="add">
+                <input type="submit" value="+ Add New Contacts">
+    </form>
+</div>
+
+
+<h1>Personal Contacts</h1>
+
+<table>
+    <tr>
+        {% for item in header %}
+        <th>{{ item }}</th>
+        {% endfor %}
+    </tr>
+    {% for row in contacts %}
+    <tr>
+        {% for item in row %}
+        <td>{{ item }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

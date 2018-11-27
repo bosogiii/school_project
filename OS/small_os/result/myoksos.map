@@ -1,0 +1,132 @@
+ myoksos
+
+ Timestamp is 57108b6c (Fri Apr 15 15:34:20 2016)
+
+ Preferred load address is 00020000
+
+ Start         Length     Name                   Class
+ 0001:00000000 0000148cH .text                   CODE
+ 0002:00000000 0000058fH .rdata                  DATA
+ 0002:0000058f 00000000H .edata                  DATA
+ 0003:00000000 000001a1H .data                   DATA
+ 0003:000001a8 00000230H .bss                    DATA
+
+  Address         Publics by Value              Rva+Base     Lib:Object
+
+ 0001:00000000       _EntryPoint16              00021000 f   entry.obj
+ 0001:0000001d       EntryPoint32               0002101d f   entry.obj
+ 0001:00000048       _WRITE_PORT_UCHAR          00021048 f   hal_asm.obj
+ 0001:00000058       _READ_PORT_UCHAR           00021058 f   hal_asm.obj
+ 0001:00000063       _HalpEnableInterrupt       00021063 f   hal_asm.obj
+ 0001:00000070       _myoksos_init              00021070 f   myoksos.obj
+ 0001:00000100       _CrtPrintf                 00021100 f   6845crt.obj
+ 0001:000001a0       _CrtPrintTextXYWithAttr    000211a0 f   6845crt.obj
+ 0001:000005d0       _CrtInitializeDriver       000215d0 f   6845crt.obj
+ 0001:000005f0       _CrtClearScreen            000215f0 f   6845crt.obj
+ 0001:00000640       _vsprintf                  00021640 f   vsprintf.obj
+ 0001:000009b0       _KrnInitializeKernel       000219b0 f   kernel.obj
+ 0001:00000a00       _HalInitializeHal          00021a00 f   hal.obj
+ 0001:00001220       _memset                    00022220 f   string.obj
+ 0001:00001260       _MmkInitializeMemoryManager 00022260 f   mmanager.obj
+ 0002:00000000       ??_C@_0BB@CINOICC@Booting?5Error?$CB?$AN?6?$AA@ 00023000     myoksos.obj
+ 0002:00000014       ??_C@_0CL@EKIIKDMP@KrnInitializeKernel?$CI?$CJ?5returned?5a@ 00023014     myoksos.obj
+ 0002:00000040       ??_C@_0BC@CPDHJIFL@Halting?5system?4?$AN?6?$AA@ 00023040     myoksos.obj
+ 0002:00000054       ??_C@_0DD@JLJAC@MmkInitializeMemoryManager?$CI?$CJ?5ret@ 00023054     kernel.obj
+ 0002:00000088       ??_C@_0CI@GFPEFDPE@HalInitializeHal?$CI?$CJ?5returned?5an?5e@ 00023088     kernel.obj
+ 0002:000000b0       ??_C@_0BI@NMHEANFH@Halp_IRQ_HardDrive?$CI?$CJ?5?$AN?6?$AA@ 000230b0     hal.obj
+ 0002:000000c8       ??_C@_0BO@DKPJFPAC@Halp_IRQ_MathCoprocessor?$CI?$CJ?5?$AN?6?$AA@ 000230c8     hal.obj
+ 0002:000000e8       ??_C@_0BE@NEDDPGBJ@Halp_IRQ_Mouse?$CI?$CJ?5?$AN?6?$AA@ 000230e8     hal.obj
+ 0002:000000fc       ??_C@_0BC@IGOLJKOG@Halp_IRQ_VGA?$CI?$CJ?5?$AN?6?$AA@ 000230fc     hal.obj
+ 0002:00000110       ??_C@_0BI@MCNHIJMG@Halp_IRQ_CMOSClock?$CI?$CJ?5?$AN?6?$AA@ 00023110     hal.obj
+ 0002:00000128       ??_C@_0BD@BMGLEMCE@Halp_IRQ_LPT1?$CI?$CJ?5?$AN?6?$AA@ 00023128     hal.obj
+ 0002:0000013c       ??_C@_0BD@CNIDFGLJ@Halp_IRQ_LPT2?$CI?$CJ?5?$AN?6?$AA@ 0002313c     hal.obj
+ 0002:00000150       ??_C@_0BD@PNONLAAJ@Halp_IRQ_COM1?$CI?$CJ?5?$AN?6?$AA@ 00023150     hal.obj
+ 0002:00000164       ??_C@_0BD@MMAFKKJE@Halp_IRQ_COM2?$CI?$CJ?5?$AN?6?$AA@ 00023164     hal.obj
+ 0002:00000178       ??_C@_0BP@BPMNCKPI@Halp_IRQ_ReqFromSlave8259?$CI?$CJ?5?$AN?6?$AA@ 00023178     hal.obj
+ 0002:00000198       ??_C@_0BL@NHEAFIGN@Halp_ECT_MachineCheck?$CI?$CJ?5?$AN?6?$AA@ 00023198     hal.obj
+ 0002:000001b4       ??_C@_0BN@IIPPLJCI@Halp_ECT_AlignmentCheck?$CI?$CJ?5?$AN?6?$AA@ 000231b4     hal.obj
+ 0002:000001d4       ??_C@_0CB@BAMOPHKE@Halp_ECT_FloatingPointError?$CI?$CJ?5?$AN?6@ 000231d4     hal.obj
+ 0002:000001f8       ??_C@_0BI@ECFHJJPN@Halp_ECT_PageFault?$CI?$CJ?5?$AN?6?$AA@ 000231f8     hal.obj
+ 0002:00000210       ??_C@_0CA@BNNEHHMP@Halp_ECT_GeneralProtection?$CI?$CJ?5?$AN?6?$AA@ 00023210     hal.obj
+ 0002:00000230       ??_C@_0BN@IPDIOMJP@Halp_ECT_StackException?$CI?$CJ?5?$AN?6?$AA@ 00023230     hal.obj
+ 0002:00000250       ??_C@_0CA@NKBGCIFH@Halp_ECT_SegmentNotPresent?$CI?$CJ?5?$AN?6?$AA@ 00023250     hal.obj
+ 0002:00000270       ??_C@_0BJ@PELGBAAP@Halp_ECT_InvalidTSS?$CI?$CJ?5?$AN?6?$AA@ 00023270     hal.obj
+ 0002:0000028c       ??_C@_0CB@KDIHIBHF@Halp_ECT_CoprocessorOverrun?$CI?$CJ?5?$AN?6@ 0002328c     hal.obj
+ 0002:000002b0       ??_C@_0CB@LIGLLFBG@Halp_ECT_DeviceNotAvailable?$CI?$CJ?5?$AN?6@ 000232b0     hal.obj
+ 0002:000002d4       ??_C@_0BM@EDOCEHEB@Halp_ECT_InvaildOpcode?$CI?$CJ?5?$AN?6?$AA@ 000232d4     hal.obj
+ 0002:000002f0       ??_C@_0BF@GOILIIOG@Halp_ECT_BOUNDS?$CI?$CJ?5?$AN?6?$AA@ 000232f0     hal.obj
+ 0002:00000308       ??_C@_0BD@PJNACMJH@Halp_ECT_INTO?$CI?$CJ?5?$AN?6?$AA@ 00023308     hal.obj
+ 0002:0000031c       ??_C@_0BJ@CHEGJKKD@Halp_ECT_Breakpoint?$CI?$CJ?5?$AN?6?$AA@ 0002331c     hal.obj
+ 0002:00000338       ??_C@_0BC@EPIMJMAK@Halp_ECT_NMI?$CI?$CJ?5?$AN?6?$AA@ 00023338     hal.obj
+ 0002:0000034c       ??_C@_0BN@LHNLHKKE@Halp_ECT_DebugException?$CI?$CJ?5?$AN?6?$AA@ 0002334c     hal.obj
+ 0002:0000036c       ??_C@_0BL@DCNBJOMK@Halp_ECT_DivideByZero?$CI?$CJ?5?$AN?6?$AA@ 0002336c     hal.obj
+ 0002:00000388       ??_C@_0CP@DIODDKOF@HalpInitializeProcessor?$CI?$CJ?5return@ 00023388     hal.obj
+ 0002:000003b8       ??_C@_0CD@FBKHEGHB@Interrupt?5Service?5is?5installed?$CB?$CB@ 000233b8     hal.obj
+ 0002:000003dc       ??_C@_0CL@KJAKIFMC@HalpStartIntService?$CI?$CJ?5returned?5a@ 000233dc     hal.obj
+ 0002:00000408       ??_C@_0BP@OLPBBHME@SystemTimer?5is?5initialized?$CB?$CB?$AN?6?$AA@ 00023408     hal.obj
+ 0002:00000428       ??_C@_0CI@HNIFLDMK@HalpInitSysTimer?$CI?$CJ?5returned?5an?5e@ 00023428     hal.obj
+ 0002:00000450       ??_C@_0BD@GMFGECEC@PIC?5is?5success?$CB?$CB?$AN?6?$AA@ 00023450     hal.obj
+ 0002:00000464       ??_C@_0CD@GOIDGDAA@HalpInitPIC?$CI?$CJ?5returned?5an?5error?4@ 00023464     hal.obj
+ 0002:00000488       ??_C@_0BI@MIIPFAGL@A20?5line?5is?5success?$CB?$CB?$AN?6?$AA@ 00023488     hal.obj
+ 0002:000004a0       ??_C@_0CF@GHKHCIHI@HalpEnableA20?$CI?$CJ?5returned?5an?5erro@ 000234a0     hal.obj
+ 0002:000004c8       ??_C@_0CB@FJNLJOKK@bp?0?5?$CD1?30x?$CFx?0?5?$CD2?30x?$CFx?0?5?$CD3?30x?$CFx?5?$AN?6@ 000234c8     hal.obj
+ 0002:000004ec       ??_C@_0CB@LEODENJF@gp?0?5?$CD1?30x?$CFx?0?5?$CD2?30x?$CFx?0?5?$CD3?30x?$CFx?5?$AN?6@ 000234ec     hal.obj
+ 0002:00000510       ??_C@_0CC@MPDKKHPO@Memory?5Manager?5is?5initialized?$CB?$CB?$AN@ 00023510     mmanager.obj
+ 0002:00000534       ??_C@_0CN@PMHMBCPL@MmpCreateMemPoolBlk?$CI?$CJ?5returned?5a@ 00023534     mmanager.obj
+ 0002:00000564       ??_C@_0CL@NCIHNJEM@MmpCheckMemorySize?$CI?$CJ?5returned?5an@ 00023564     mmanager.obj
+ 0003:00000000       _m_GdtrDesc                00024000     entry.obj
+ 0003:00000008       _m_GdtTable                00024008     entry.obj
+
+ entry point at        0001:00000000
+
+ Static symbols
+
+ 0001:000012c0       _MmpCheckMemorySize        000222c0 f   mmanager.obj
+ 0001:00001340       _MmpCreateMemPoolBlk       00022340 f   mmanager.obj
+ 0001:00001450       _MmpGetRequiredBlocksFromBytes 00022450 f   mmanager.obj
+ 0001:00000a30       _HalpInitializeProcessor   00021a30 f   hal.obj
+ 0001:00000af0       _HalpEnableA20             00021af0 f   hal.obj
+ 0001:00000c10       _HalpInitPIC               00021c10 f   hal.obj
+ 0001:00000cb0       _HalpInitSysTimer          00021cb0 f   hal.obj
+ 0001:00000d10       _Halp_ECT_DivideByZero     00021d10 f   hal.obj
+ 0001:00000d30       _Halp_ECT_DebugException   00021d30 f   hal.obj
+ 0001:00000d50       _Halp_ECT_NMI              00021d50 f   hal.obj
+ 0001:00000d70       _Halp_ECT_Breakpoint       00021d70 f   hal.obj
+ 0001:00000db0       _Halp_ECT_INTO             00021db0 f   hal.obj
+ 0001:00000dd0       _Halp_ECT_BOUNDS           00021dd0 f   hal.obj
+ 0001:00000df0       _Halp_ECT_InvaildOpcode    00021df0 f   hal.obj
+ 0001:00000e10       _Halp_ECT_DeviceNotAvailable 00021e10 f   hal.obj
+ 0001:00000e30       _Halp_ECT_DoubleFault      00021e30 f   hal.obj
+ 0001:00000e50       _Halp_ECT_CoprocessorOverrun 00021e50 f   hal.obj
+ 0001:00000e70       _Halp_ECT_InvalidTSS       00021e70 f   hal.obj
+ 0001:00000e90       _Halp_ECT_SegmentNotPresent 00021e90 f   hal.obj
+ 0001:00000eb0       _Halp_ECT_StackException   00021eb0 f   hal.obj
+ 0001:00000ed0       _Halp_ECT_GeneralProtection 00021ed0 f   hal.obj
+ 0001:00000f20       _Halp_ECT_PageFault        00021f20 f   hal.obj
+ 0001:00000f40       _Halp_ECT_FloatingPointError 00021f40 f   hal.obj
+ 0001:00000f60       _Halp_ECT_AlignmentCheck   00021f60 f   hal.obj
+ 0001:00000f80       _Halp_ECT_MachineCheck     00021f80 f   hal.obj
+ 0001:00000fa0       _Halp_IRQ_Keyboard         00021fa0 f   hal.obj
+ 0001:00000fd0       _Halp_IRQ_ReqFromSlave8259 00021fd0 f   hal.obj
+ 0001:00000ff0       _Halp_IRQ_COM2             00021ff0 f   hal.obj
+ 0001:00001010       _Halp_IRQ_COM1             00022010 f   hal.obj
+ 0001:00001030       _Halp_IRQ_LPT2             00022030 f   hal.obj
+ 0001:00000fa0       _Halp_IRQ_FloppyDisk       00021fa0 f   hal.obj
+ 0001:00001050       _Halp_IRQ_LPT1             00022050 f   hal.obj
+ 0001:00001070       _Halp_IRQ_CMOSClock        00022070 f   hal.obj
+ 0001:00001090       _Halp_IRQ_VGA              00022090 f   hal.obj
+ 0001:000010b0       _Halp_IRQ_Mouse            000220b0 f   hal.obj
+ 0001:000010d0       _Halp_IRQ_MathCoprocessor  000220d0 f   hal.obj
+ 0001:000010f0       _Halp_IRQ_HardDrive        000220f0 f   hal.obj
+ 0001:00001110       _HalpStartIntService       00022110 f   hal.obj
+ 0001:00000670       _ffmt                      00021670 f   vsprintf.obj
+ 0001:00000140       _CrtpPrintfFmt             00021140 f   6845crt.obj
+ 0001:00000300       _CrtpGetNextVideoPtr       00021300 f   6845crt.obj
+ 0001:00000330       _CrtpGetNextVideoPtrWithPos 00021330 f   6845crt.obj
+ 0001:00000360       _CrtpScrollOneLine         00021360 f   6845crt.obj
+ 0001:000003d0       _CrtpKeyLF                 000213d0 f   6845crt.obj
+ 0001:00000460       _CrtpKeyCR                 00021460 f   6845crt.obj
+ 0001:000004b0       _CrtpKeyBackspace          000214b0 f   6845crt.obj
+ 0001:000004f0       _CrtpUpdateCursorPosByPtr  000214f0 f   6845crt.obj
+ 0001:00000540       _CrtpSetCursorPos          00021540 f   6845crt.obj
+ 0001:000000c0       _halt                      000210c0 f   myoksos.obj

@@ -8,19 +8,23 @@ CC = gcc
 
 CFLAGS = 
 
-OBJS = main.o util.o scan.o parse.o symtab.o analyze.o code.o cgen.o
+OBJS_FLEX  = main.o util.o lex.yy.o parse.o symtab.o code.o
 
-OBJS_FLEX  = main.o util.o lex.yy.o parse.o symtab.o analyze.o code.o cgen.o
+OBJS_FLEX_YACC = main.o util.o symtab.o code.o lex.yy.o y.tab.o
 
-cminus_flex: $(OBJS_FLEX)
-	$(CC) $(CLAGS) main.o util.o lex.yy.o -o cminus_flex -lfl
+
+y.tab.h: cminus.y
+	yacc -d -v cminus.y
+
+cminus_flex_yacc: $(OBJS_FLEX_YACC)
+	$(CC) $(CFLAGS) $(OBJS_FLEX_YACC) -o cminus_flex_yacc -lfl
 
 lex.yy.o: cminus.l scan.h util.h globals.h
 	flex cminus.l
-	$(CC) $(CFLAGS) -c lex.yy.c -lfl
+	$(CC) $(CFLAGS) -c lex.yy.c
 
-tiny: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o tiny
+y.tab.o: globals.h util.h scan.h parse.h
+	$(CC) $(CFLAGS) -c y.tab.c
 
 main.o: main.c globals.h util.h scan.h parse.h analyze.h cgen.h
 	$(CC) $(CFLAGS) -c main.c
@@ -47,14 +51,21 @@ cgen.o: cgen.c globals.h symtab.h code.h cgen.h
 	$(CC) $(CFLAGS) -c cgen.c
 
 clean:
-	-rm tiny
-	-rm tm
 	-rm $(OBJS)
 	-rm lex.yy.c
 	-rm cminus_flex
 	-rm $(OBJS_FLEX)
+	-rm $(OBJS_FLEX_YACC)
+	-rm cminus_flex_yacc
+	-rm y.tab.c
+	-rm y.tab.h
+	-rm y.output
+
 tm: tm.c
 	$(CC) $(CFLAGS) tm.c -o tm
 
-all: tiny tm cminus_flex
+test:
+	-./cminus_flex_yacc test.cm
+
+all: y.tab.h cminus_flex_yacc
 

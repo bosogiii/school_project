@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{%block title %}
+User Add
+{%  endblock %}
+
+{% block body %}
+<h1>Add New User</h1>
+{{msg}}
+<form action="/admin/useradd" method='POST'>
+    <input type='text' name="sid" placeholder="sid" required>
+    <input type="password" name="passwd" placeholder="password" required>
+    <input type="text" name="sname" placeholder="user name" required>
+    {#<input type="text" name="sex" placeholder="sex" required>#}
+    <select name="sex" required>
+        <option disabled selected value="">sex</option>
+        <option value= "male">male</option>
+        <option value = "female">female</option>
+        </option>
+    </select>
+    <input type="text" name="major_id" placeholder="major id" required>
+    <input type="text" name="tutor_id" placeholder="tutor_id" required>
+    <input type="text" name="grade" placeholder="grade" required>
+    <input type="submit" value="add">
+
+{% endblock %}
+
