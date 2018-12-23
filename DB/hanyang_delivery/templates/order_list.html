@@ -1,0 +1,220 @@
+{% extends "layout_customer.html" %}
+{% set name = session['name'] %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Order List</h1>
+    <div>
+        {{ msg }}
+    </div>
+    <div class="table-wrapper">
+        <h4>주문 내역</h4>
+        <table class="alt">
+            <thead>
+                {% for val in header1 %}
+                    <td>
+                        {{ val }}
+                    </td>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for item in list %}
+                    <tr>
+                        {% for val in item %}
+                            {% if loop.index == 2 %}
+                                <td><ul class="alt">
+                                    {% for key, value in val.items() %}
+                                        <li>{{ key }}</li>
+                                    {% endfor %}
+                                </ul></td>
+                                <td><ul class="alt">
+                                    {% for key, value in val.items() %}
+                                        <li>{{ value }}</li>
+                                    {% endfor %}
+                                </ul></td>
+                            {% elif loop.index == 3 %}
+                                {% if val['type'] == 'card' %}
+                                    <td> 카드, 카드번호 : {{ val['data']['card_num'] }}</td>
+                                {% else %}
+                                    {% for name in bank %}
+                                        {% if name[0] == val["data"]["bid"] %}
+                                            <td> {{ name[1] }}, 계좌번호 : {{ val["data"]["acc_num"] }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% else %}
+                                <td>
+                                {{ val }}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h4>현재 주문 현황</h4>
+        <table class="alt">
+            <thead>
+                {% for val in header2 %}
+                    <td>
+                        {{ val }}
+                    </td>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for item in now_list %}
+                    <tr>
+                        {% for val in item %}
+                            {% if loop.index == 2 %}
+                            <td><ul class="alt">
+                            {% for key, value in val.items() %}
+                                <li>{{ key }}</li>
+                            {% endfor %}
+                            </ul></td>
+                            <td><ul class="alt">
+                            {% for key, value in val.items() %}
+                                <li>{{ value }}</li>
+                            {% endfor %}
+                            </ul></td>
+                            {% elif loop.index == 3 %}
+                            {% if val['type'] == 'card' %}
+                                    <td> 카드, 카드번호 : {{ val['data']['card_num'] }}</td>
+                                {% else %}
+                                    {% for name in bank %}
+                                        {% if name[0] == val["data"]["bid"] %}
+                                            <td> {{ name[1] }}, 계좌번호 : {{ val["data"]["acc_num"] }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% elif loop.index == 5%}
+                                <td>{{ status_list[val] }}</td>
+                            {% else %}
+                            <td>
+                            {{ val }}
+                            </td>
+                            {% endif %}
+                        {% endfor %}
+                        <td>
+                            {% if item[4] == 2 %}
+                            <form method="POST" action="/customer/<name>/orderlist">
+                            <div class="col-6">
+                                <input type="hidden" name="phone" value='{{ session['phone'] }}'>
+                                <input type="hidden" name="local" value="{{ session['local'] }}">
+                                <input type="hidden" name="domain" value="{{ session['domain'] }}">
+                                <input type="hidden" name="time", value="{{ item['time'] }}">
+                                <input type="hidden" name="status" value=3>
+                                <input type="hidden" name="did" value="{{ item['did'] }}">
+                                <input type="submit" value="주문확인" class="primary" />
+                            </div>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h4>결제수단 목록</h4>
+    <div class="row gtr-200">
+        <div class="col-6 col-12-small">
+            <div class="table-wrapper">
+                <table class="alt">
+                    <thead>
+                        <tr>
+                            {% for val in header3 %}
+                            <td>{{ val }}</td>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in payment %}
+                            <tr>
+                                {% if item['type'] == 'card' %}
+                                    <td> 카드, 카드번호 : {{ item['data']['card_num'] }}</td>
+                                {% else %}
+                                    {% for name in bank %}
+                                        {% if name[0] == item["data"]["bid"] %}
+                                            <td> {{ name[1] }}, 계좌번호 : {{ item["data"]["acc_num"] }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <td>
+                                    <form method="POST" action="/customer/{{ name }}/editpay">
+                                        <div class="col-6">
+                                            <ul class="actions">
+                                                <input type="hidden" name="payment" value="{{ payment }}" />
+                                                <input type="hidden" name="item" value="{{ item }}" />
+                                                {% if item['type'] =='card' %}
+                                                <input type="hidden" name="mode" value="card_edit" />
+                                                {% else %}
+                                                <input type="hidden" name="mode" value="account_edit" />
+                                                {% endif %}
+                                                <input type="submit" value="변경" class="primary" />
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <div class="col-6-small">
+                                        <form method="POST" action="/customer/{{ name }}/editpay">
+                                            <ul class="actions">
+                                                <input type="hidden" name="payment" value="{{ payment }}" />
+                                                <input type="hidden" name="item" value="{{ item }}" />
+                                                <input type="hidden" name="mode" value="delete" />
+                                                <input type="submit" value="삭제" class="primary" />
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-6 col-12-small"><br/><br/>
+            <div class="box">
+                <strong/>카드추가<br><br>
+                <form action="/customer/{{ name }}/editpay" method='POST'>
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12-medium">
+                            <input type="text" name="card_num" placeholder="카드번호">
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden" name="mode" value="card" />
+                            <input type="submit" value="추가" class="primary" /></li>
+                            <input type="reset" value="Reset" /></li>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="box">
+                <strong/>계좌추가<br><br>
+                <form action="/customer/{{ name }}/editpay" method='POST'>
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12-medium">
+                            <select name="bid">
+                                <option value="">은행명</option>
+                                {% for name in bank %}
+                                <option value=" {{ name['bid'] }} ">{{ name['name'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <input type="text" name="acc_num" placeholder="계좌번호">
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden" name="mode" value="account" />
+                            <input type="submit" value="추가" class="primary" /></li>
+                            <input type="reset" value="Reset" /></li>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

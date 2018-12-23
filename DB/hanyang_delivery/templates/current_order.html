@@ -1,0 +1,81 @@
+{% extends "layout_store.html" %}
+{% set sname = name %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Current Orders</h1>
+    <div class="table-wrapper">
+        <table class="alt">
+            <thead>
+                <tr>
+                    {% for val in header %}
+                    <th>{{ val }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        {% for item in order %}
+                            {% if loop.index < 7 %}
+                                {% if item is mapping %}
+                                    <td><ul class="alt">
+                                    {% for key, value in item.items() %}
+                                        <li>{{ key }}</li>
+                                    {% endfor %}
+                                    </ul></td>
+                                    <td><ul class="alt">
+                                    {% for key, value in item.items() %}
+                                        <li>{{ value }}</li>
+                                    {% endfor %}
+                                    </ul></td>
+                                {% elif loop.index == 1 %}
+                                    <td>{{ status_list[item] }}</td>
+                                {% else %}
+                                    <td>{{ item }}</td>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if order['did'] == None %}
+                        <td>
+                            <form method="POST" action="/seller/storelist/{{ name }}/orders">
+                                <div class="col-12">
+                                    <ul class="actions small">
+                                        <input type="hidden" name="phone" value='{{ order['phone'] }}'>
+                                        <input type="hidden" name="local" value="{{ order['local'] }}">
+                                        <input type="hidden" name="domain" value="{{ order['domain'] }}">
+                                        <input type="hidden" name="time", value="{{ order['time'] }}">
+                                        <input type="hidden" name="status" value=1>
+                                        <input type="submit" value="주문확인" class="primary" />
+                                    </ul>
+                                </div>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/seller/storelist/{{ name }}/orders">
+                                <div class="col-12">
+                                    <ul class="actions small">
+                                        <input type="hidden" name="phone" value='{{ order['phone'] }}'>
+                                        <input type="hidden" name="local" value="{{ order['local'] }}">
+                                        <input type="hidden" name="domain" value="{{ order['domain'] }}">
+                                        <input type="hidden" name="time", value="{{ order['time'] }}">
+                                        <input type="hidden" name="status" value=5>
+                                        <input type="submit" value="주문취소" class="primary" />
+                                    </ul>
+                                </div>
+                            </form>
+                        </td>
+                        {% else %}
+                            <td></td>
+                            <td></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

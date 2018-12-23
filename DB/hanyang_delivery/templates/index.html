@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Hanyang Deliery</h1>
+
+{% if session['name'] == None %}
+    {{ msg }}
+    <h4>Login please!</h4>
+    <div class="box">
+        <form action="/login" method='POST' id="log">
+            <div class="row gtr-100 gtr-uniform">
+                <div class="col-12-medium">
+                    <input type="email" name="email" id="email" value="" placeholder="Email">
+                </div>
+                <div class="col-12-medium">
+                    <input type="password" name="passwd" id="passwd" value="" placeholder="password">
+                </div>
+                <div class="col-12">
+                    <ul class="actions">
+                        <li><input type="submit" value="Log In" class="primary" /></li>
+                        <li><input type="reset" value="Reset" /></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+{% else %}
+    <div class="box">
+        <form action="/select" method='POST'>
+            <div class="row gtr-100 gtr-uniform">
+                <div class="col-12">
+                    <ul class="actions">
+                        {% if session['customer'] == True %}
+                            <input type="hidden" name = "type" value="customer">
+                            <li><input type="submit" value="Customer" class="primary" /></li>
+                        {% endif %}
+                        {% if session['seller'] == True %}
+                            <input type="hidden" name = "type" value="seller">
+                            <li><input type="submit" value="seller" class="primary" /></li>
+                        {% endif %}
+                        {% if session['delivery'] == True %}
+                            <input type="hidden" name = "type" value="delivery">
+                            <li><input type="submit" value="delivery" class="primary" /></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endif %}
+    <script>
+        let form = document.getElementById("log");
+        form.onsubmit = function () {
+          if(!form.email.value){
+              alert("missing email");
+              return false;
+          }
+          else if(!form.passwd.value){
+              alert("missing password");
+              return false;
+          }
+          return true;
+        };
+    </script>
+{% endblock %}

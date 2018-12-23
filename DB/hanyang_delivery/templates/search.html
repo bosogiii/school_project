@@ -1,0 +1,143 @@
+{% extends "layout_customer.html" %}
+{% set name = session['name'] %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Order</h1>
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-small">
+            <div class="box">
+                <h4>위치기반 검색</h4>
+                <form action="/customer/{{ session['name'] }}/order" method='POST' id="location" name="location">
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12">
+                            <ul class="actions">
+                                <input type="hidden" value="location" name="location" />
+                                <input type="hidden" id="lat" name="lat"/>
+                                <input type="hidden" id="lng" name="lng" />
+                                <input type="hidden" id="day" name="day" />
+                                <input type="hidden" id="hour" name="hour" />
+                                <li><input type="submit" value="Search" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6 col-12-small">
+            <div class="box">
+                <h4>태그기반 검색</h4>
+                <form action="/customer/{{ session['name'] }}/order" method='POST' id="tag">
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12-medium">
+                            <div class="col-12">
+                                <select name="tag">
+                                    <option value="">tag</option>
+                                    <option value="일식">일식</option>
+                                    <option value="양식">양식</option>
+                                    <option value="중식">중식</option>
+                                    <option value="한식">한식</option>
+                                    <option value="자장면">자장면</option>
+                                    <option value="돈까스">돈까스</option>
+                                    <option value="순댓국">순댓국</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Search" class="primary" /></li>
+                                <li><input type="reset" value="Reset" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6 col-12-small">
+            <div class="box">
+                <h4>주소기반 검색</h4>
+                <form action="/customer/{{ session['name'] }}/order" method='POST' id="address">
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12-medium">
+                            <div class="col-12">
+                                <select name="address">
+                                    <option value="">주소</option>
+                                    <option value="서울특별시">서울특별시</option>
+                                    <option value="부산광역시">부산광역시</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="제주특별자치도">제주특별자치도</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Search" class="primary" /></li>
+                                <li><input type="reset" value="Reset" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6 col-12-small">
+            <div class="box">
+                <h4>이름기반 검색</h4>
+                <form action="/customer/{{ session['name'] }}/order" method='POST' id="sname">
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12-medium">
+                            <input type="text" name="sname" placeholder="이름">
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Search" class="primary" /></li>
+                                <li><input type="reset" value="Reset" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        if("geolocation" in navigator) {
+            var lng;
+            var lat;
+            var time;
+
+            var option = {
+                timeout     : 20000
+            }
+
+            navigator.geolocation.getCurrentPosition(success, error, option);
+
+            function success(position) {
+                lat = position.coords.latitude;
+                lng = position.coords.longitude;
+                time = new Date(position.timestamp);
+                var day = time.getDay();
+                var hour = time.getHours();
+
+                document.getElementById("day").value = day;
+                document.getElementById("hour").value = hour;
+                document.getElementById("lng").value = lng;
+                document.getElementById("lat").value = lat;
+                console.log(lng, lat, time, day, hour)
+            };
+
+            function error() {
+                alert("위치정보를 가져올 수 없습니다.");
+            }
+        } else {
+            alert("위치 정보를 지원하지 않습니다.");
+        }
+
+    </script>
+
+{% endblock %}

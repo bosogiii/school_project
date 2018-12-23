@@ -6,24 +6,20 @@
 
 CC = gcc
 
-CFLAGS = 
+CFLAGS = -Wall -w -g
 
-OBJS_FLEX  = main.o util.o lex.yy.o parse.o symtab.o code.o
-
-OBJS_FLEX_YACC = main.o util.o symtab.o code.o lex.yy.o y.tab.o
+OBJS = y.tab.o main.o util.o lex.yy.o symtab.o code.o analyze.o
 
 
-y.tab.h: cminus.y
-	yacc -d -v cminus.y
-
-cminus_flex_yacc: $(OBJS_FLEX_YACC)
-	$(CC) $(CFLAGS) $(OBJS_FLEX_YACC) -o cminus_flex_yacc -lfl
+cminus: $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o cminus -lfl
 
 lex.yy.o: cminus.l scan.h util.h globals.h
 	flex cminus.l
 	$(CC) $(CFLAGS) -c lex.yy.c
 
-y.tab.o: globals.h util.h scan.h parse.h
+y.tab.o: cminus.y globals.h util.h scan.h parse.h
+	yacc -d -v cminus.y
 	$(CC) $(CFLAGS) -c y.tab.c
 
 main.o: main.c globals.h util.h scan.h parse.h analyze.h cgen.h
@@ -38,7 +34,7 @@ scan.o: scan.c scan.h util.h globals.h
 parse.o: parse.c parse.h scan.h globals.h util.h
 	$(CC) $(CFLAGS) -c parse.c
 
-symtab.o: symtab.c symtab.h
+symtab.o: symtab.c globals.h symtab.h
 	$(CC) $(CFLAGS) -c symtab.c
 
 analyze.o: analyze.c globals.h symtab.h analyze.h
@@ -51,12 +47,9 @@ cgen.o: cgen.c globals.h symtab.h code.h cgen.h
 	$(CC) $(CFLAGS) -c cgen.c
 
 clean:
-	-rm $(OBJS)
 	-rm lex.yy.c
-	-rm cminus_flex
-	-rm $(OBJS_FLEX)
-	-rm $(OBJS_FLEX_YACC)
-	-rm cminus_flex_yacc
+	-rm cminus
+	-rm $(OBJS)
 	-rm y.tab.c
 	-rm y.tab.h
 	-rm y.output
@@ -65,7 +58,6 @@ tm: tm.c
 	$(CC) $(CFLAGS) tm.c -o tm
 
 test:
-	-./cminus_flex_yacc test.cm
+	-./cminus test.cm
 
-all: y.tab.h cminus_flex_yacc
 

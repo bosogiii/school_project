@@ -1,0 +1,57 @@
+{% extends "layout_customer.html" %}
+{% set name = session['name'] %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Pay edit</h1>
+    <div class="col-6 col-12-small"><br/><br/>
+    {% if mode == "card_edit" %}
+        <div class="box">
+            <strong/>카드 번호 변경<br><br>
+            <form action="/customer/{{ name }}/editpay" method='POST'>
+                <div class="row gtr-100 gtr-uniform">
+                    <div class="col-12-medium">
+                        <input type="text" name="card_num" value="{{ item['data']['card_num'] }}" placeholder="카드번호">
+                    </div>
+                    <div class="col-12">
+                        <input type="hidden" name="payment" value="{{ payment }}" />
+                        <input type="hidden" name="item" value="{{ item }}" />
+                        <input type="hidden" name="mode" value="edit_card" />
+                        <input type="submit" value="변경" class="primary" />
+                        <input type="reset" value="Reset" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <div class="box">
+            <strong/>계좌 변경<br><br>
+            <form action="/customer/{{ name }}/editpay" method='POST'>
+                <div class="row gtr-100 gtr-uniform">
+                    <div class="col-12-medium">
+                        <select name="bid">
+                            <option value="">은행명</option>
+                            {% for name in bank %}
+                            <option value=" {{ name['bid'] }} ">{{ name['name'] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" name="acc_num" value="{{ item['data']['acc_num'] }}" placeholder="계좌번호">
+                    </div>
+                    <div class="col-12">
+                        <input type="hidden" name="payment" value="{{ payment }}" />
+                        <input type="hidden" name="item" value="{{ item }}" />
+                        <input type="hidden" name="mode" value="edit_account" />
+                        <input type="submit" value="변경" class="primary" />
+                        <input type="reset" value="Reset" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

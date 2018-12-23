@@ -1,0 +1,70 @@
+{% extends "layout_customer.html" %}
+{% set name = session['name'] %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Order</h1>
+    {% if location %}
+    <div id="map"></div>
+    {% endif %}
+    <div class="table-wrapper"><br>
+        <table>
+            <thead>
+                <tr>
+                    {% for val in header %}
+                    <th>{{ val }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for store in store_list %}
+                <tr>
+                    <td>{{ store[0] }}</td>
+                    <td>{{ store[1] }}</td>
+                    <td>{{ store[2] }}</td>
+
+                    <td>
+                        <form method="GET" action="/customer/{{ session['name'] }}/order/basket">
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <input type="hidden" name="sid" value="{{ store[3] }}">
+                                    <input type="submit" value="Enter" class="primary" />
+                                </ul>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        function initMap() {
+            var loc = {lat: {{ lat }}, lng: {{ lng }} };
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 13, center: loc});
+            var marker = new google.maps.Marker({position: loc, map: map, icon:image});
+            setMarkers(map);
+
+        }
+
+        function setMarkers(map) {
+
+            {%  for store in store_list %}
+                var st_loc = {lat: {{ store['lat'] }}, lng: {{ store['lng'] }}};
+                var store_marker = new google.maps.Marker({position: st_loc, map: map});
+            {% endfor %}
+
+        }
+    </script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBopXe5tnml-8we5SI5cUxq7-2QkYWu9MQ&callback=initMap">
+    </script>
+
+{% endblock %}

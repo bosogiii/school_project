@@ -1,0 +1,44 @@
+{% extends "layout_delivery.html" %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Welcome {{ session['name'] }}!</h1><br>
+<h1>Current Delivery</h1>
+    <div class="table-wrapper">
+        <table class="alt">
+            <thead>
+                <tr>
+                    {% for val in header %}
+                    <th>{{ val }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for items in list %}
+                    <tr>
+                        {% for item in items %}
+                            {% if item is mapping %}
+                                <td><ul class="alt">
+                                {% for key, value in item.items() %}
+                                    <li>{{ key }}</li>
+                                {% endfor %}
+                                </ul></td>
+                                <td><ul class="alt">
+                                {% for key, value in item.items() %}
+                                    <li>{{ value }}</li>
+                                {% endfor %}
+                                </ul></td>
+                            {% else %}
+                                <td>{{ item }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

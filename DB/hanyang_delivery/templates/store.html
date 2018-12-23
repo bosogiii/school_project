@@ -1,0 +1,130 @@
+{% extends "layout_store.html" %}
+{% set sname = store[0]['sname'] %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Store Information</h1>
+    <div class="table-wrapper">
+        <table class="alt">
+            <tbody>
+                <tr>
+                    <td><div class="align-center"><strong />{{ header[0] }}</td>
+                    <td colspan="2">{{ store[0]['address'] }}</td>
+                    <td><div class="align-center"><strong />{{ header[4] }}</td>
+                    <td colspan="3">{{ store[0]['tag'] }}</td>
+                </tr>
+                <tr>
+                    <td><div class="align-center"><strong />{{ header[1] }}</td>
+                    <td colspan="2">{{ store[0]['sname'] }}</td>
+                    <td colspan="4"><div class="align-center"><strong />{{ header[5] }}</td>
+
+                </tr>
+                <tr>
+                    <td><div class="align-center"><strong />{{ header[2] }}</td>
+                    <td colspan="2"><ul class="alt">
+                    {% for num in nums %}
+                        <li>{{ num }}</li>
+                    {% endfor %}
+                    </ul></td>
+                    <td colspan="4"><ul class="alt">
+                        {{ store[0]['info'] }}
+                    </ul></td>
+                </tr>
+                <tr>
+                    <td colspan="7"><div class="align-center"><strong />{{ header[3] }}</div></td>
+                </tr>
+                <div>
+                    <tr>
+                        {% for schedule in schedules %}
+                            <td>
+                                {{ day_list[schedule['day']] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for schedule in schedules %}
+                            <td>
+                                {% if schedule['holiday'] == True %}
+                                    휴무일
+                                {% else %}
+                                    open : {{ schedule['open'][:2] + ":" + schedule['open'][2:] }} <br>
+                                    close : {{ schedule['closed'][:2] + ":" + schedule['closed'][2:] }}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </div>
+            </tbody>
+        </table>
+    </div>
+    <div class="row gtr-200">
+        <div class="col-6 col-12-small">
+            <div class="table-wrapper">
+                <table class="alt">
+                    <thead>
+                        <tr>
+                            <td>메뉴</td>
+                            <td>삭제</td>
+                            <td>변경</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in menu %}
+                            <tr>
+                                <td>{{ item[0] }}</td>
+                                <td>
+                                    <form method="POST" action="/seller/storelist/{sname}">
+                                    <div class="col-6">
+                                        <ul class="actions">
+                                            <input type="hidden" name="menu" value="{{ item[0] }}" />
+                                            <input type="hidden" name="sid" value="{{ store[0]['sid'] }}">
+                                            <input type="hidden" name="sname" value="{{ store[0]['sname'] }}" />
+                                            <input type="hidden" name="mode" value="delete" />
+                                            <input type="submit" value="메뉴 삭제" class="primary" />
+                                        </ul>
+                                    </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <div class="col-6-small">
+                                        <form method="POST" action="/seller/storelist/{sname}">
+                                            <ul class="actions">
+                                                <input type="text" name="menu_change" value="{{ item[0] }}" />
+                                                <input type="hidden" name="menu" value="{{ item[0] }}" />
+                                                <input type="hidden" name="sid" value="{{ store[0]['sid'] }}" />
+                                                <input type="hidden" name="sname" value="{{ store[0]['sname'] }}" />
+                                                <input type="hidden" name="mode" value="edit" />
+                                                <input type="submit" value="메뉴 변경" class="primary" />
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-6 col-12-small"><br/><br/>
+            <div class="box">
+                <form action="/seller/storelist/{sname}" method='POST'>
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12-medium">
+                            <input type="text" name="menu" value="" placeholder="메뉴명">
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden" name="sname" value="{{ store[0]['sname'] }}" />
+                            <input type="hidden" name="sid" value="{{ store[0]['sid'] }}" />
+                            <input type="hidden" name="mode" value="insert" />
+                            <input type="submit" value="메뉴 추가" class="primary" /></li>
+                            <input type="reset" value="Reset" /></li>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

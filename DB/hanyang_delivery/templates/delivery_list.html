@@ -1,0 +1,46 @@
+{% extends "layout_store.html" %}
+{% set sname = name %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Current Orders</h1>
+    <div class="table-wrapper">
+        <table class="alt">
+            <thead>
+                <tr>
+                    {% for val in header %}
+                    <th>{{ val }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for items in delivery %}
+                    <tr>
+                        {% for item in items %}
+                            <td>{{ item }}</td>
+                        {% endfor %}
+                        <td>
+                            <form method="POST" action="/seller/storelist/{{ name }}/orders/delivery">
+                                <div class="col-12">
+                                    <ul class="actions small">
+                                        <input type="hidden" name="phone" value='{{ values['phone'] }}'>
+                                        <input type="hidden" name="local" value="{{ values['local'] }}">
+                                        <input type="hidden" name="domain" value="{{ values['domain'] }}">
+                                        <input type="hidden" name="time", value="{{ values['time'] }}">
+                                        <input type="hidden" name="did", value="{{ items['did'] }}">
+                                        <input type="hidden" name="status" value=2>
+                                        <input type="submit" value="선택" class="primary" />
+                                    </ul>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

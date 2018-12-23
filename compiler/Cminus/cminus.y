@@ -78,8 +78,7 @@ type_spec   : INT  { $$  = newTypeNode(TypeNameK);
                      $$->attr.type = VOID; }
             ;
 params      : param_list { $$ = $1; }
-            /*| VOID  { $$  = newTypeNode(TypeNameK);
-                     $$->attr.type = VOID; }*/
+            | /* empty */ { $$ = NULL; }
             ;
 param_list  : param_list COMMA param
                  { YYSTYPE t = $1;
@@ -100,7 +99,7 @@ param       : type_spec saveName
                  }
             | type_spec saveName LBRACE RBRACE
                  { $$ = newParamNode(ArrParamK);
-                   $$->attr.name = savedName;
+                   $$->attr.array.name = savedName;
                    $$->lineno = savedLineNo;
                    $$->child[0] = $1;
                  }
@@ -266,7 +265,7 @@ var         : saveName {
                  }
             | saveName { 
                    $$  = newExpNode(ArrIdK);
-                   $$->attr.name = savedName;
+                   $$->attr.array.name = savedName;
                  }
               LBRACE exp RBRACE
                  {  $$ = $2;

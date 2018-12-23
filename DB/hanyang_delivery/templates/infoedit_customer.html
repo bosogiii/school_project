@@ -1,0 +1,66 @@
+{% extends "layout_customer.html" %}
+{% set name = session['name'] %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+    {{ msg }}
+<h1>Personal information edit</h1>
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-small">
+            <div class="box">
+                <h4>name edit</h4>
+                <form action="/customer/{{ session['name'] }}/infoedit" method='POST' id="log">
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12-medium">
+                            <input type="text" name="name" id="name" value={{ session['name'] }}>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Change" class="primary" /></li>
+                                <li><input type="reset" value="Reset" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6 col-12-small">
+            <div class="box">
+                <h4>password edit</h4>
+                <form action="/customer/{{ session['name'] }}/infoedit" method='POST' id="log">
+                    <div class="row gtr-100 gtr-uniform">
+                        <div class="col-12-medium">
+                            <input type="password" name="passwd" id="passwd" placeholder="password" required>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Change" class="primary" /></li>
+                                <li><input type="reset" value="Reset" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><br>
+    <div class="box">
+        <h4>directory insert</h4>
+        <form action="/customer/{{ session['name'] }}/infoedit" method='POST' id="log">
+            <div class="row gtr-100 gtr-uniform">
+                <div class="col-12-medium">
+                    <input type="text" name="address" placeholder="배송지 입력">
+                </div>
+                <div class="col-12">
+                    <ul class="actions">
+                        <li><input type="submit" value="Insert" class="primary" /></li>
+                        <li><input type="reset" value="Reset" /></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

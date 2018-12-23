@@ -1,0 +1,40 @@
+{% extends "layout_seller.html" %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>Store List</h1>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    {% for val in header %}
+                    <th>{{ val }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for store in store_list %}
+                <tr>
+                    <td>{{ store[0] }}</td>
+                    <td>{{ store[1] }}</td>
+                    <td>
+                        <form method="POST" action="/seller/storelist">
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <input type="hidden" name="sname" value="{{ store[1] }}">
+                                    <input type="hidden" name="sid" value="{{ store[2] }}">
+                                    <input type="submit" value="Enter" class="primary" />
+                                </ul>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

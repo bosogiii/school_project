@@ -1,0 +1,76 @@
+{% extends "layout_customer.html" %}
+{% set name = session['name'] %}
+
+{% block title %}
+Hanyang Delivery
+{%  endblock %}
+
+{% block body %}
+<h1>장바구니</h1>
+    <div class="row gtr-200">
+        <form method="POST" action="/customer/{{ name }}/order/basket">
+            <div class="col-6 col-12-small">
+                <div class="table-wrapper">
+                    <table class="alt">
+                        <thead>
+                            <tr>
+                                <td>메뉴</td>
+                                <td>수량</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in menu_list %}
+                                <tr>
+                                    <td>{{ item[0] }}</td>
+                                    <td>
+                                        <div class="col-6">
+                                            <select name="{{ item[0] }}">
+                                            <option value="0">수량</option>
+                                                {%  for i in range(10) %}
+                                                    <option value="{{ i }}">{{ i }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="box">
+                    <select name="payment" required>
+                        <option value="">결제방법</option>
+                            {% for item in payment_list %}
+                                {% if item['type'] == 'card' %}
+                                    <option value="{{ item }}">카드, 카드번호 : {{ item['data']['card_num'] }}</option>
+                                {% else %}
+                                    {% for name in bank %}
+                                        {% if name[0] == item["data"]["bid"] %}
+                                            <option value="{{ item }}">{{ name[1] }}, 계좌번호 : {{ item["data"]["acc_num"] }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                    </select>
+                </div>
+                <div class="box">
+                    <select name="directory" required>
+                        <option value="">배송지</option>
+                            {% for item in directiry_list %}
+                                <option value="{{ item[0] }}">{{ item[0] }}</option>
+                            {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <ul class="actions">
+                    <input type="hidden" value="{{ sid }}" name="sid"}
+                    <li><input type="submit" value="주문" class="primary" /></li>
+                    <li><input type="reset" value="Reset" /></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+{% endblock %}
